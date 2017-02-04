@@ -10,6 +10,7 @@ export default class SpheroManager extends ComponentBase {
     this.subscribe("addSphero", this.add.bind(this));
     this.subscribe("removeSphero", this.remove.bind(this));
     this.subscribe("runCommand", this.runCommand.bind(this));
+    this.subscribe("getSpheros", this.getSpheros.bind(this));
   }
   private add(name: string, port: string) {
     if (this.contains(name)) {
@@ -21,6 +22,16 @@ export default class SpheroManager extends ComponentBase {
       if (typeof error !== "undefined") {
         throw error;
       }
+      orb.configureCollisions({
+        meth: 0x01,
+        xt: 0x7A,
+        xs: 0xFF,
+        yt: 0x7A,
+        ys: 0xFF,
+        dead: 100
+      }, () => {
+        console.log("configured orb.", "success");
+      });
       this.orbs[name] = new Orb(name, port, orb);
       this.publish("updateOrbs", this.orbs);
     });
@@ -42,5 +53,8 @@ export default class SpheroManager extends ComponentBase {
     if (commandName in this.orbs[targetName]) {
       this.orbs[targetName][commandName](...args);
     }
+  }
+  private getSpheros() {
+    this.publish("updateOrbs", this.orbs);
   }
 }

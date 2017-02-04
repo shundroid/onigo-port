@@ -1,7 +1,7 @@
 import SocketManager from "./components/socketManager";
 import SpheroManager from "./components/spheroManager";
 
-const port: number = 8080;
+const port: number = 8085;
 
 console.log(`onigo-port is running on ${port}`);
 

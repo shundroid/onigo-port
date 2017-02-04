@@ -8,7 +8,8 @@ const subjectList: Array<string> = [
   "removeSphero",
   "rejectName",
   "runCommand",
-  "updateOrbs"
+  "updateOrbs",
+  "getSpheros"
 ];
 
 const middlewares: { [key: string]: (any) => any } = {

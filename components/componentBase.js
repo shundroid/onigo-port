@@ -1,14 +1,14 @@
 import * as publisher from "../eventPublisher";
 
 export default class ComponentBase {
-  subscribe(eventName: string, observeFunction: publisher.ObserveFunction) {
-    publisher.subscribe(eventName, (author: any, ...data: Array<any>) => {
+  subscribe(eventName, observeFunction) {
+    publisher.subscribe(eventName, (author, ...data) => {
       if (author !== this) {
         observeFunction(...data);
       }
     });
   }
-  publish(eventName: string, ...data: Array<any>) {
+  publish(eventName, ...data) {
     publisher.publish(this, eventName, data);
   }
 }

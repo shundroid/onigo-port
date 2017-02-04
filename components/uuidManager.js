@@ -2,7 +2,6 @@ import ComponentBase from "./componentBase";
 import noble from "noble";
 
 export default class UUIDManager extends ComponentBase {
-  private nameAndUUIDs: { [key: string]: string };
   constructor() {
     super();
 
@@ -20,11 +19,11 @@ export default class UUIDManager extends ComponentBase {
 
     this.subscribe("addSphero", this.addSpheroWithUUID.bind(this));
   }
-  private setName(uuid: string, name: string) {
+  setName(uuid, name) {
     console.log(`name: ${name}, uuid: ${uuid}`);
     this.nameAndUUIDs[name] = uuid;
   }
-  private addSpheroWithUUID(name: string, spheroName: string) {
+  addSpheroWithUUID(name, spheroName) {
     if (typeof this.nameAndUUIDs[name] === "undefined") {
       throw new Error("The name's uuid was not found.");
     }
